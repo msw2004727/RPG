@@ -101,48 +101,5 @@
         </div>
       </div>
     </div>
-    
-    <script>
-      // 服務工作者註冊（如果需要 PWA 功能）
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('%PUBLIC_URL%/sw.js')
-            .then(function(registration) {
-              console.log('SW registered: ', registration);
-            })
-            .catch(function(registrationError) {
-              console.log('SW registration failed: ', registrationError);
-            });
-        });
-      }
-      
-      // 錯誤處理
-      window.addEventListener('error', function(e) {
-        console.error('Application error:', e.error);
-        
-        // 如果 React 應用載入失敗，顯示錯誤信息
-        const root = document.getElementById('root');
-        if (root && !root.hasChildNodes()) {
-          root.innerHTML = `
-            <div class="loading-fallback">
-              <div class="fallback-content">
-                <div class="fallback-icon">❌</div>
-                <div class="fallback-title">載入失敗</div>
-                <div class="fallback-message">應用程式載入時發生錯誤</div>
-                <button class="fallback-button" onclick="location.reload()">重新載入</button>
-              </div>
-            </div>
-          `;
-        }
-      });
-      
-      // 性能監控
-      window.addEventListener('load', function() {
-        if (window.performance) {
-          const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
-          console.log('Page load time:', loadTime + 'ms');
-        }
-      });
-    </script>
-  </body>
+    </body>
 </html>
