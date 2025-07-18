@@ -1,0 +1,308 @@
+/* 全局樣式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* 載入畫面 */
+.app-loading {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #e0e0e0;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.loading-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.logo-icon {
+  font-size: 48px;
+  animation: bounce 2s infinite;
+}
+
+.logo-text {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4a90e2 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.loading-spinner {
+  margin-bottom: 20px;
+}
+
+.spinner-ring {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(74, 144, 226, 0.2);
+  border-top: 4px solid #4a90e2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.loading-message {
+  font-size: 16px;
+  color: #a0a0a0;
+  font-weight: 400;
+}
+
+/* 滾動條全局樣式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* 選中文本樣式 */
+::selection {
+  background: rgba(74, 144, 226, 0.3);
+  color: #e0e0e0;
+}
+
+::-moz-selection {
+  background: rgba(74, 144, 226, 0.3);
+  color: #e0e0e0;
+}
+
+/* 按鈕通用樣式 */
+button {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:focus-visible {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+/* 輸入框通用樣式 */
+input, textarea {
+  font-family: inherit;
+  outline: none;
+  border: none;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+/* 無障礙輔助 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 高對比度模式 */
+@media (prefers-contrast: high) {
+  .App {
+    filter: contrast(1.2);
+  }
+}
+
+/* 深色模式偏好 */
+@media (prefers-color-scheme: light) {
+  /* 如果用戶偏好淺色模式，可以在這裡調整 */
+  /* 但由於遊戲本身就是深色主題，這裡保持不變 */
+}
+
+/* 動畫定義 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 響應式斷點 */
+@media (max-width: 1200px) {
+  .logo-text {
+    font-size: 28px;
+  }
+  
+  .logo-icon {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .loading-container {
+    padding: 30px 20px;
+  }
+  
+  .logo-text {
+    font-size: 24px;
+  }
+  
+  .logo-icon {
+    font-size: 36px;
+  }
+  
+  .spinner-ring {
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+  }
+  
+  .loading-message {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loading-logo {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+  }
+  
+  .logo-icon {
+    font-size: 32px;
+  }
+}
+
+/* 打印樣式 */
+@media print {
+  .App {
+    display: none;
+  }
+  
+  body::after {
+    content: "此應用程式無法打印，請在瀏覽器中使用。";
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 18px;
+    color: #333;
+  }
+}
+
+/* 工具提示樣式 */
+[title] {
+  position: relative;
+}
+
+/* 焦點指示器 */
+.focus-visible {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+/* 錯誤狀態 */
+.error {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2) !important;
+}
+
+/* 成功狀態 */
+.success {
+  border-color: #4caf50 !important;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2) !important;
+}
+
+/* 警告狀態 */
+.warning {
+  border-color: #ffa726 !important;
+  box-shadow: 0 0 0 2px rgba(255, 167, 38, 0.2) !important;
+}
+
+/* 載入狀態 */
+.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* 禁用狀態 */
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: not-allowed !important;
+}

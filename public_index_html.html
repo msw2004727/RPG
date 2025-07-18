@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1a1a2e" />
+    <meta name="description" content="沉浸式文字RPG遊戲，與AI一起展開冒險" />
+    <meta name="keywords" content="RPG, 文字遊戲, AI, 角色扮演, 冒險" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- 預連接到可能使用的域名 -->
+    <link rel="preconnect" href="https://api.anthropic.com">
+    <link rel="preconnect" href="https://firebase.googleapis.com">
+    
+    <!-- PWA 相關 meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="文字RPG">
+    
+    <!-- Android PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="文字RPG">
+    
+    <!-- 防止縮放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>文字RPG - AI冒險世界</title>
+    
+    <style>
+      /* 載入時的基本樣式 */
+      #root {
+        height: 100vh;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      }
+      
+      /* 載入失敗時的備用樣式 */
+      .loading-fallback {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: #e0e0e0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        text-align: center;
+      }
+      
+      .fallback-content {
+        padding: 20px;
+      }
+      
+      .fallback-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+      
+      .fallback-title {
+        font-size: 24px;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      
+      .fallback-message {
+        font-size: 16px;
+        opacity: 0.8;
+        margin-bottom: 20px;
+      }
+      
+      .fallback-button {
+        padding: 12px 24px;
+        background: #4a90e2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      
+      .fallback-button:hover {
+        background: #357abd;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <div class="loading-fallback">
+        <div class="fallback-content">
+          <div class="fallback-icon">⚠️</div>
+          <div class="fallback-title">需要啟用 JavaScript</div>
+          <div class="fallback-message">此應用程式需要 JavaScript 才能運行</div>
+          <button class="fallback-button" onclick="location.reload()">重新載入</button>
+        </div>
+      </div>
+    </noscript>
+    
+    <div id="root">
+      <!-- React 應用將在這裡渲染 -->
+      <div class="loading-fallback">
+        <div class="fallback-content">
+          <div class="fallback-icon">🎮</div>
+          <div class="fallback-title">載入中...</div>
+          <div class="fallback-message">正在啟動文字RPG</div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      // 服務工作者註冊（如果需要 PWA 功能）
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+      
+      // 錯誤處理
+      window.addEventListener('error', function(e) {
+        console.error('Application error:', e.error);
+        
+        // 如果 React 應用載入失敗，顯示錯誤信息
+        const root = document.getElementById('root');
+        if (root && !root.hasChildNodes()) {
+          root.innerHTML = `
+            <div class="loading-fallback">
+              <div class="fallback-content">
+                <div class="fallback-icon">❌</div>
+                <div class="fallback-title">載入失敗</div>
+                <div class="fallback-message">應用程式載入時發生錯誤</div>
+                <button class="fallback-button" onclick="location.reload()">重新載入</button>
+              </div>
+            </div>
+          `;
+        }
+      });
+      
+      // 性能監控
+      window.addEventListener('load', function() {
+        if (window.performance) {
+          const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+          console.log('Page load time:', loadTime + 'ms');
+        }
+      });
+    </script>
+  </body>
+</html>
