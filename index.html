@@ -10,20 +10,16 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
-    <!-- 預連接到可能使用的域名 -->
     <link rel="preconnect" href="https://api.anthropic.com">
     <link rel="preconnect" href="https://firebase.googleapis.com">
     
-    <!-- PWA 相關 meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="文字RPG">
     
-    <!-- Android PWA -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="文字RPG">
     
-    <!-- 防止縮放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>文字RPG - AI冒險世界</title>
@@ -97,7 +93,6 @@
     </noscript>
     
     <div id="root">
-      <!-- React 應用將在這裡渲染 -->
       <div class="loading-fallback">
         <div class="fallback-content">
           <div class="fallback-icon">🎮</div>
@@ -111,7 +106,7 @@
       // 服務工作者註冊（如果需要 PWA 功能）
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker.register('%PUBLIC_URL%/sw.js')
             .then(function(registration) {
               console.log('SW registered: ', registration);
             })
